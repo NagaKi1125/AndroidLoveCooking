@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="3dp"
+    android:layout_marginTop="3dp">
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/stepCount"
+        android:text="1"
+        app:strokeColor="@color/gray"
+        android:theme="@style/Theme.MaterialComponents"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="40dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+    <LinearLayout
+        android:layout_toEndOf="@+id/stepCount"
+        android:id="@+id/steps"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/step"
+            android:textSize="16sp"
+            android:hint="Nhập bước"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollHorizontally="false"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"/>
+        <ImageButton
+            android:id="@+id/remove"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:onClick="onDelete"
+            android:src="@drawable/ic_sharp_cancel_24"/>
+    </LinearLayout>
+    <ImageView
+        android:src="@drawable/basic_dish"
+        android:id="@+id/imgStep"
+        android:layout_margin="5dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/steps"
+        android:contentDescription="@string/app_name" />
+</RelativeLayout>

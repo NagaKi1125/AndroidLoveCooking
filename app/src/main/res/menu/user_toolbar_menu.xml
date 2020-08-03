@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/acton_edit_info"
+        android:title="Sửa thông tin"/>
+    <item
+        android:id="@+id/action_edit_password"
+        android:title="Đổi mật khẩu"/>
+    <item
+        android:id="@+id/action_logout"
+        android:title="Đăng xuất"/>
+</menu>

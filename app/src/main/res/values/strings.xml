@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Love Cooking</string>
+    <string name="lovecooking_admin">LoveCooking-Admin</string>
+    <string name="dish_s_name">Dish\'s Name</string>
+    <string name="th_m_b_nh_lu_n">Thêm bình luận</string>
+    <string name="ng_y_t_o">Ngày tạo</string>
+    <string name="dish_name">Dish Name</string>
+    <string name="c_c_b_c_l_m">Các bước làm:</string>
+    <string name="nguy_n_li_u">Nguyên Liệu:</string>
+    <string name="like_count">Like count</string>
+    <string name="lo_i_danh_m_c">Loại danh mục:</string>
+    <string name="nh_n_x_t">Nhận xét:</string>
+    <string name="m_n_n_n_y_c_ph_t_tri_n_nh_th_n_o">Món ăn này đã được phát triển như thế nào? Xem lịch sử phát triển</string>
+    <string name="ng_nh_p">Đăng nhập</string>
+    <string name="email_ng_nh_p">Email đăng nhập</string>
+    <string name="email_input">Nhập Email</string>
+    <string name="pass_input">Nhập mật khẩu</string>
+    <string name="love_cooking">LOVE COOKING</string>
+    <string name="slogan">Yêu Bếp - Yêu gia đình</string>
+    <string name="register">Chưa có tài khoản? Đăng ký ngay</string>
+    <string name="home_page">Món ăn</string>
+    <string name="myKit">Bếp của tôi</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="fullname">Họ và Tên:</string>
+    <string name="nh_p_bi_t_danh">Nhập biệt danh:</string>
+    <string name="fname">Nhập họ và tên</string>
+    <string name="uname">Nhập biệt hiệu</string>
+    <string name="pass">Nhập mật khẩu</string>
+    <string name="m_t_kh_u">Mật khẩu</string>
+    <string name="nh_p_l_i_m_t_kh_u">Nhập lại mật khẩu</string>
+    <string name="gi_i_t_nh">Giới tính</string>
+    <string name="nam">Nam</string>
+    <string name="female">Nữ</string>
+    <string name="btnres">Đăng kỳ tài khoản</string>
+    <string name="btnlo">Quay về đăng nhập</string>
+    <string name="birth">Nhấp chọn ngày sinh</string>
+    <string name="birth_input">Nhập ngày sinh</string>
+    <string name="addr">Địa chỉ</string>
+    <string name="address">Nhập địa chỉ</string>
+    <string name="dd">DD</string>
+    <string name="mm">MM</string>
+    <string name="yy">YYYY</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="th_c_n_c_a_t_i">Thực đơn của tôi:</string>
+    <string name="b_p_theo_d_i">Bếp theo dõi:</string>
+    <string name="m_n_y_u_th_ch">Món yêu thích:</string>
+    <string name="todo">TODO</string>
+    <string name="menu_date">Menu Date</string>
+    <string name="breakfast">Thực đơn sáng</string>
+    <string name="lunch">Thực đơn trưa</string>
+    <string name="dinner">Thực đơn tối</string>
+    <string name="date">Ngày</string>
+    <string name="like">like</string>
+    <string name="dish_name_add">Tên món ăn:</string>
+    <string name="new_recipe">CÔNG THỨC MỚI</string>
+    <string name="input_dish_name">Nhập tên món ăn</string>
+    <string name="ch_n_nh_ch_nh">Chọn ảnh chính:</string>
+    <string name="step">Nhập công thức</string>
+    <string name="newcate">Nhập danh mục mới</string>
+
+    <string-array name="dateTime">
+        <item>Chọn thời gian biểu</item>
+        <item>Sáng</item>
+        <item>Trưa</item>
+        <item>Tối</item>
+    </string-array>
+    <string-array name="gender">
+        <item>Nam</item>
+        <item>Nữ</item>
+    </string-array>
+</resources>

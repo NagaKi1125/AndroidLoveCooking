@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/basic_dish"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/app_name" />
+        <TextView
+            android:id="@+id/dishname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cơm trắng"
+            android:layout_toEndOf="@+id/avatar"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dishname"
+            android:layout_toEndOf="@+id/avatar"
+            android:text="Admin Love cooking"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
+        <TextView
+            android:layout_margin="5dp"
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/author"
+            android:maxHeight="50dp"
+            android:textSize="14dp"
+            android:text="Hãy ăn và cảm nhậnĐây là một món ăn truyền thông ngon và bổ dưỡng cho gia đình"
+            android:layout_toEndOf="@+id/avatar"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

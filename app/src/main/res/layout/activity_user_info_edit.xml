@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserInfoEditActivity">
+    <RelativeLayout
+        android:layout_marginHorizontal="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/back"
+            android:src="@drawable/ic_round_arrow_back_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <FrameLayout
+            android:id="@+id/image"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:src="@drawable/user" />
+            <TextView
+                android:id="@+id/txtava"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="3dp"
+                android:text="Nhấp để chọn ảnh đại diện"
+                android:textColor="@color/white"
+                android:minHeight="25dp"
+                android:alpha=".7"
+                android:background="@color/dim_gray"
+                android:layout_marginBottom="20dp"/>
+        </FrameLayout>
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Tên của bạn là gì"
+            android:layout_below="@+id/image"
+            android:textAlignment="center"
+            android:textColor="@color/dim_gray"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập biệt hiệu bạn muốn dùng"
+            android:layout_below="@+id/name"
+            android:textAlignment="center"
+            android:textColor="@color/dim_gray"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <Spinner
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:id="@+id/datePicker"
+            android:layout_below="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="3dp"/>
+
+        <TextView
+            android:id="@+id/birthday"
+            android:layout_below="@+id/datePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Bạn sinh vào ngày tháng năm nào"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+        <DatePicker
+            android:id="@+id/datePicker1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/birthday"
+            android:layout_centerHorizontal="true"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
+        <LinearLayout
+            android:id="@+id/btnClick"
+            android:layout_below="@+id/datePicker1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chọn"
+                android:layout_marginHorizontal="30dp"
+                app:cornerRadius="20dp"
+                android:theme="@style/Theme.MaterialComponents"
+                app:strokeColor="@color/slate_gray"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:text="Hủy"
+                app:cornerRadius="20dp"
+                android:theme="@style/Theme.MaterialComponents"
+                app:strokeColor="@color/slate_gray"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_below="@+id/btnClick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Bạn sống ở đâu"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/update"
+            android:layout_below="@+id/address"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cập nhật"
+            android:layout_marginHorizontal="30dp"
+            app:cornerRadius="20dp"
+            android:theme="@style/Theme.MaterialComponents"
+            app:strokeColor="@color/slate_gray"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            />
+
+    </RelativeLayout>
+</ScrollView>

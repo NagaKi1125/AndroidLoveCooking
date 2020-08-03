@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuAddActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Thêm mới thực đơn"
+            android:textSize="25sp"
+            android:textStyle="bold|normal" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/dish_avatar"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="30dp" />
+
+        <TextView
+            android:id="@+id/dish_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dish_avatar"
+            android:layout_marginHorizontal="60dp"
+            android:text="Tên món ăn"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/t1"
+            android:text="Thêm vào một thực đơn sẵn có:"
+            android:textSize="17sp"
+            android:layout_below="@+id/dish_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/t1"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/menuPicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="3dp"
+                android:layout_weight="1"/>
+
+            <Spinner
+                android:id="@+id/dateTimePicker"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="3dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addToMenu"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinner"
+            android:layout_marginBottom="30dp"
+            android:layout_alignParentEnd="true"
+            android:text="Thêm vào thực đơn"
+            app:cornerRadius="20dp"
+            android:theme="@style/Theme.MaterialComponents"
+            app:strokeColor="@color/slate_gray"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            />
+        <TextView
+            android:id="@+id/t2"
+            android:text="Hoặc tạo một thực đơn mới:"
+            android:textSize="17sp"
+            android:layout_below="@+id/addToMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:id="@+id/newMenuMaking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/t2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/newDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="Nhấp để chọn ngày"
+                android:textSize="17sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thêm"
+                android:layout_weight="4"
+                app:cornerRadius="10dp"
+                android:theme="@style/Theme.MaterialComponents"
+                app:strokeColor="@color/light_blue"
+                android:textColor="@color/cornflower_blue"
+                android:background="@color/light_blue"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                />
+        </LinearLayout>
+
+        <DatePicker
+            android:id="@+id/datePicker1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newMenuMaking"
+            android:layout_centerHorizontal="true"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
+        <LinearLayout
+            android:id="@+id/btnClick"
+            android:layout_below="@+id/datePicker1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chọn"
+                android:layout_marginHorizontal="30dp"
+                app:cornerRadius="20dp"
+                android:theme="@style/Theme.MaterialComponents"
+                app:strokeColor="@color/slate_gray"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:text="Hủy"
+                app:cornerRadius="20dp"
+                android:theme="@style/Theme.MaterialComponents"
+                app:strokeColor="@color/slate_gray"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
