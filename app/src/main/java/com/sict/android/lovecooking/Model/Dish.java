@@ -45,9 +45,6 @@ public class Dish {
     @SerializedName("history")
     @Expose
     private List<History> history = null;
-    @SerializedName("cmt")
-    @Expose
-    private List<Comment> cmt = null;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -60,7 +57,7 @@ public class Dish {
 
     public Dish(int id, String dishName, String cateId, String avatar, String description,
                 String use, String material, String steps, String stepImgs, String author,
-                int likedCount, Integer checked, List<History> history, List<Comment> cmt,
+                int likedCount, Integer checked, List<History> history,
                 String createdAt, String updatedAt) {
         this.id = id;
         this.dishName = dishName;
@@ -75,7 +72,6 @@ public class Dish {
         this.likedCount = likedCount;
         this.checked = checked;
         this.history = history;
-        this.cmt = cmt;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -184,14 +180,6 @@ public class Dish {
         this.history = history;
     }
 
-    public List<Comment> getCmt() {
-        return cmt;
-    }
-
-    public void setCmt(List<Comment> cmt) {
-        this.cmt = cmt;
-    }
-
     public String getCreatedAt() {
         return createdAt;
     }
@@ -224,100 +212,9 @@ public class Dish {
                 ", likedCount=" + likedCount +
                 ", checked=" + checked +
                 ", history=" + history +
-                ", cmt=" + cmt +
                 ", createdAt='" + createdAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
                 '}';
-    }
-
-    public class Comment {
-        @SerializedName("id")
-        @Expose
-        private String commentID;
-
-        @SerializedName("name")
-        @Expose
-        private String name;
-
-        @SerializedName("comment")
-        @Expose
-        private String comment;
-
-        @SerializedName("created_at")
-        @Expose
-        private String cmt_created_at;
-
-        @SerializedName("updated_at")
-        @Expose
-        private String cmt_updated_at;
-
-        public Comment() {
-        }
-
-        public Comment(String commentID, String name, String comment, String cmt_created_at, String cmt_updated_at) {
-            this.commentID = commentID;
-            this.name = name;
-            this.comment = comment;
-            this.cmt_created_at = cmt_created_at;
-            this.cmt_updated_at = cmt_updated_at;
-        }
-
-        public Comment(String commentID, String name, String comment) {
-            this.commentID = commentID;
-            this.name = name;
-            this.comment = comment;
-        }
-
-        public String getCmt_created_at() {
-            return cmt_created_at;
-        }
-
-        public void setCmt_created_at(String cmt_created_at) {
-            this.cmt_created_at = cmt_created_at;
-        }
-
-        public String getCmt_updated_at() {
-            return cmt_updated_at;
-        }
-
-        public void setCmt_updated_at(String cmt_updated_at) {
-            this.cmt_updated_at = cmt_updated_at;
-        }
-
-        public String getCommentID() {
-            return commentID;
-        }
-
-        public void setCommentID(String commentID) {
-            this.commentID = commentID;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getComment() {
-            return comment;
-        }
-
-        public void setComment(String comment) {
-            this.comment = comment;
-        }
-
-        @Override
-        public String toString() {
-            return "Comment{" +
-                    "commentID='" + commentID + '\'' +
-                    ", name='" + name + '\'' +
-                    ", comment='" + comment + '\'' +
-                    ", cmt_created_at='" + cmt_created_at + '\'' +
-                    ", cmt_updated_at='" + cmt_updated_at + '\'' +
-                    '}';
-        }
     }
 
     public class History{

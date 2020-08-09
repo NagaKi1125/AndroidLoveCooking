@@ -82,17 +82,12 @@ public class DishAdapter extends RecyclerView.Adapter<DishViewHolder> {
         String author = dishList.get(position).getAuthor();
         likedCount[position] = dishList.get(position).getLikedCount();
         List<Dish.History> dhpost = dishList.get(position).getHistory();
-        List<Dish.Comment> comment = dishList.get(position).getCmt();
-        String post = "";String cmt= "";
+        String post = "";
 
         for(Dish.History hispost: dhpost){
             post+=hispost.getDhposts()+"_";
         }
 
-        for(Dish.Comment comments : comment){
-            cmt+=comments.getCommentID()+"#"+comments.getName()+"#"+comments.getComment()+"#"
-                    +comments.getCmt_updated_at()+"_";
-        }
 
         //show to recycler view
         Picasso.get().load(avatar).into(holder.dish_image);
@@ -171,7 +166,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishViewHolder> {
         });
 
         //ready information for intent to dish info activity
-        String dishcmt = cmt;
+
         String historyPost = post;
         int likeC = likedCount[position];
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +187,6 @@ public class DishAdapter extends RecyclerView.Adapter<DishViewHolder> {
                 intent.putExtra("author",author);
                 intent.putExtra("like_count",likedCount[position]);
                 intent.putExtra("hispost", historyPost);
-                intent.putExtra("cmt",dishcmt);
 
                 v.getContext().startActivity(intent);
             }

@@ -122,23 +122,16 @@ public class BreakfastAdapter extends RecyclerView.Adapter<ListDishViewHolder> {
                     String author = response.body().getAuthor();
                     int liked_count = response.body().getLikedCount();
                     List<Dish.History> dhpost = response.body().getHistory();
-                    List<Dish.Comment> comment = response.body().getCmt();
-                    String post = "";String cmt= "";
+                    String post = "";
 
                     for(Dish.History hispost: dhpost){
                         post+=hispost.getDhposts()+"_";
                     }
 
-                    for(Dish.Comment comments : comment){
-                        cmt+=comments.getCommentID()+"#"+comments.getName()+"#"+comments.getComment()+"#"
-                                +comments.getCmt_updated_at()+"_";
-                    }
-
-                    String dishcmt = cmt;
                     String historyPost = post;
                     // send info
                     sendDishInfo(id,dish_name,cate_id,avatar,description,use,material,steps,step_imgs,
-                            author,liked_count,historyPost,dishcmt,created_at,updated_at,v);
+                            author,liked_count,historyPost,created_at,updated_at,v);
 
                 }else {
                     Toast.makeText(v.getContext(),
@@ -159,7 +152,7 @@ public class BreakfastAdapter extends RecyclerView.Adapter<ListDishViewHolder> {
 
     private void sendDishInfo(int id, String dish_name, String cate_id, String avatar, String description,
                               String use, String material, String steps, String step_imgs,
-                              String author, int liked_count, String historyPost, String dishcmt,
+                              String author, int liked_count, String historyPost,
                               String created_at, String updated_at, View v) {
 
         Intent intent = new Intent(v.getContext(), DishInfoActivity.class);
@@ -177,7 +170,6 @@ public class BreakfastAdapter extends RecyclerView.Adapter<ListDishViewHolder> {
         intent.putExtra("author",author);
         intent.putExtra("like_count",liked_count);
         intent.putExtra("hispost", historyPost);
-        intent.putExtra("cmt",dishcmt);
         v.getContext().startActivity(intent);
     }
 

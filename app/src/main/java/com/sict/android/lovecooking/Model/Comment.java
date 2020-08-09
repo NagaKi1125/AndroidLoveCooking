@@ -5,18 +5,18 @@ import com.google.gson.annotations.SerializedName;
 
 public class Comment {
 
+    @SerializedName("id")
+    @Expose
+    private int id;
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("user_id")
+    @Expose
+    private int userId;
     @SerializedName("avatar")
     @Expose
     private String avatar;
-    @SerializedName("user_id")
-    @Expose
-    private Integer userId;
-    @SerializedName("id")
-    @Expose
-    private Integer id;
     @SerializedName("comment")
     @Expose
     private String comment;
@@ -30,30 +30,22 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String name, String avatar, Integer userId, Integer id, String comment, String createdAt, String updatedAt) {
-        this.name = name;
-        this.avatar = avatar;
-        this.userId = userId;
+    public Comment(int id, String name, int userId, String avatar, String comment, String createdAt, String updatedAt) {
         this.id = id;
+        this.name = name;
+        this.userId = userId;
+        this.avatar = avatar;
         this.comment = comment;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public int getId() {
+        return id;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -64,12 +56,20 @@ public class Comment {
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getComment() {
@@ -99,13 +99,13 @@ public class Comment {
     @Override
     public String toString() {
         return "Comment{" +
-                "name='" + name + '\'' +
-                ", avatar='" + avatar + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", userId=" + userId +
-                ", id=" + id +
+                ", avatar='" + avatar + '\'' +
                 ", comment='" + comment + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", updatedAt='" + updatedAt + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.icu.text.RelativeDateTimeFormatter;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Gravity;
@@ -28,6 +29,9 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.chrisbanes.photoview.PhotoView;
+import com.github.marlonlom.utilities.timeago.TimeAgo;
+import com.github.marlonlom.utilities.timeago.TimeAgoMessages;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.sict.android.lovecooking.Adapter.CommentAdapter;
 import com.sict.android.lovecooking.Model.Comment;
@@ -38,7 +42,10 @@ import com.sict.android.lovecooking.Services.ApplicationInfoServices;
 import com.sict.android.lovecooking.Services.UserActivityServices;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.RequestBody;
@@ -348,8 +355,11 @@ public class DishInfoActivity extends AppCompatActivity {
         //split steps and img list into array String[]
         String[] stepsList = steps.split("_");
         String[] stepimgsList = stepImgs.split("_");
-        //split date
-        String[] datecreate = created.split("T");
+
+        //String[] datecreate = created.split("T");
+        String[] date_created = created.split("_");
+        String d = getDate(Long.parseLong(date_created[1]),"E, dd MMM yyyy#HH:mm:ss");
+        String[] dSplit = d.split("#");
         //split cate
         String[] cate = cateID.split("_");
 
@@ -376,13 +386,15 @@ public class DishInfoActivity extends AppCompatActivity {
             stepAndImg.addView(txt);
             stepAndImg.addView(textView);
 
-            ImageView imageView = new ImageButton(this);
+            PhotoView imageView = new PhotoView(this);
             if(!stepimgsList[i].equals("null")){
                 String path =url+stepimgsList[i];
                 stepAndImg.addView(imageView);
                 Picasso.get().load(path).into(imageView);
             }
         }
+
+
 
         for(int i=0;i<cate.length;i++){
             TextView textView = new TextView(this);
@@ -394,7 +406,7 @@ public class DishInfoActivity extends AppCompatActivity {
         Picasso.get().load(avatar).into(dishAvatar);
         dishname.setText(dishName);
         authorName.setText(author);
-        date.setText(datecreate[0]);
+        date.setText(date_created[0]+", "+dSplit[0]+"\nVào lúc "+dSplit[1]);
         liked.setText(like + " lượt thích");
 
         if(!sharedPreferences.getString("dish_liked","_").contains(id)){
@@ -438,6 +450,14 @@ public class DishInfoActivity extends AppCompatActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
     }
 
+    public String getDate(long milliseconds,String dateFormat){
+        SimpleDateFormat format = new SimpleDateFormat(dateFormat,Locale.forLanguageTag("vi"));
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliseconds);
+        return format.format(calendar.getTime());
+    }
+
+
     public void intentGetDishInfo(){
         Intent intent = getIntent();
         id = String.valueOf(intent.getIntExtra("Did",0));
@@ -454,27 +474,26 @@ public class DishInfoActivity extends AppCompatActivity {
         created= intent.getStringExtra("created_at");
         updated = intent.getStringExtra("updated_at");
         historyPost = intent.getStringExtra("hispost");
-        cmt = intent.getStringExtra("cmt");
     }
 
     public void getComponentID(){
-        material = (LinearLayout)findViewById(R.id.material);
-        stepAndImg = (LinearLayout)findViewById(R.id.step_and_img);
-        category = (LinearLayout)findViewById(R.id.category);
-        love = (ImageButton)findViewById(R.id.love);
-        dishname = (TextView)findViewById(R.id.dish_name);
-        date = (TextView)findViewById(R.id.date);
-        liked = (TextView)findViewById(R.id.liked);
-        dishAvatar = (ImageView)findViewById(R.id.dish_image);
-        authorAvatar = (CircleImageView)findViewById(R.id.author_avatar);
-        authorName = (TextView)findViewById(R.id.author);
-        arrowBack= (ImageButton)findViewById(R.id.arrowBack);
-        comment = (RecyclerView) findViewById(R.id.cmt);
-        history = (TextView)findViewById(R.id.history);
-        sendComment = (ImageButton)findViewById(R.id.send);
-        textCmt = (EditText) findViewById(R.id.textcmt);
-        btnEdit = (ImageButton)findViewById(R.id.editDish);
-        btnDelete = (ImageButton)findViewById(R.id.deleteDish);
-        btnMenuAdd = (ImageButton)findViewById(R.id.addDishMenu);
+        material = findViewById(R.id.material);
+        stepAndImg = findViewById(R.id.step_and_img);
+        category = findViewById(R.id.category);
+        love = findViewById(R.id.love);
+        dishname = findViewById(R.id.dish_name);
+        date = findViewById(R.id.date);
+        liked = findViewById(R.id.liked);
+        dishAvatar = findViewById(R.id.dish_image);
+        authorAvatar = findViewById(R.id.author_avatar);
+        authorName = findViewById(R.id.author);
+        arrowBack= findViewById(R.id.arrowBack);
+        comment = findViewById(R.id.cmt);
+        history = findViewById(R.id.history);
+        sendComment = findViewById(R.id.send);
+        textCmt = findViewById(R.id.textcmt);
+        btnEdit = findViewById(R.id.editDish);
+        btnDelete = findViewById(R.id.deleteDish);
+        btnMenuAdd = findViewById(R.id.addDishMenu);
     }
 }

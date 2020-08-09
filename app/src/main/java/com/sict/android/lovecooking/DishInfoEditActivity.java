@@ -206,21 +206,16 @@ public class DishInfoEditActivity extends AppCompatActivity {
                     String author = response.body().getAuthor();
                     int liked_count = response.body().getLikedCount();
                     List<Dish.History> dhpost = response.body().getHistory();
-                    List<Dish.Comment> comment = response.body().getCmt();
-                    String post = "";String cmt= "";
+                    String post = "";
 
                     for(Dish.History hispost: dhpost){
                         post+=hispost.getDhposts()+"_";
                     }
 
-                    for(Dish.Comment comments : comment){
-                        cmt+=comments.getCommentID()+"#"+comments.getName()+"#"+comments.getComment()+"#"
-                                +comments.getCmt_updated_at()+"_";
-                    }
-                    String dishcmt = cmt;
+
                     String historyPost = post;
                     sendDishInfo(id,dish_name,cate_id,avatar,description,use,material,steps,step_imgs,
-                            author,liked_count,historyPost,dishcmt,created_at,updated_at);
+                            author,liked_count,historyPost,created_at,updated_at);
                 }else{
                     Toast.makeText(DishInfoEditActivity.this,
                             "Dish edit Failed\n"+response.message()+"\n"+
@@ -438,7 +433,7 @@ public class DishInfoEditActivity extends AppCompatActivity {
 
     private void sendDishInfo(int id, String dish_name, String cate_id, String avatar, String description,
                               String use, String material, String steps, String step_imgs,
-                              String author, int liked_count, String historyPost, String dishcmt,
+                              String author, int liked_count, String historyPost,
                               String created_at, String updated_at) {
 
         Intent intent = new Intent(DishInfoEditActivity.this, DishInfoActivity.class);
@@ -456,24 +451,23 @@ public class DishInfoEditActivity extends AppCompatActivity {
         intent.putExtra("author",author);
         intent.putExtra("like_count",liked_count);
         intent.putExtra("hispost", historyPost);
-        intent.putExtra("cmt",dishcmt);
         finish();startActivity(intent);
     }
     
     private void getElementId() {
-        dish_name = (EditText) findViewById(R.id.dish_name);
-        description = (EditText) findViewById(R.id.des);
-        material =(EditText) findViewById(R.id.material);
-        step_imgs = (RecyclerView) findViewById(R.id.step_and_img);
-        btnNewSteps = (MaterialButton)findViewById(R.id.addNewStep);
-        category = (TextView) findViewById(R.id.category);
-        back = (ImageButton) findViewById(R.id.back);
-        dishAva = (ImageView)findViewById(R.id.dish_ava);
-        btnUpload = (MaterialButton)findViewById(R.id.addDish);
-        cateInput = (EditText)findViewById(R.id.cateAdd);
-        btnAddNewCate = (MaterialButton)findViewById(R.id.btnCateSave);
-        lnNewCate = (LinearLayout)findViewById(R.id.newCategory);
-        btnCancel = (MaterialButton)findViewById(R.id.cancel);
+        dish_name = findViewById(R.id.dish_name);
+        description = findViewById(R.id.des);
+        material = findViewById(R.id.material);
+        step_imgs = findViewById(R.id.step_and_img);
+        btnNewSteps = findViewById(R.id.addNewStep);
+        category = findViewById(R.id.category);
+        back = findViewById(R.id.back);
+        dishAva = findViewById(R.id.dish_ava);
+        btnUpload = findViewById(R.id.addDish);
+        cateInput = findViewById(R.id.cateAdd);
+        btnAddNewCate = findViewById(R.id.btnCateSave);
+        lnNewCate = findViewById(R.id.newCategory);
+        btnCancel = findViewById(R.id.cancel);
     }
     private void pickImage() {
         Intent gallery = new Intent();
