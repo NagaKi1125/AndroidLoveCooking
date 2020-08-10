@@ -22,10 +22,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +44,8 @@ import com.sict.android.lovecooking.Services.ApplicationInfoServices;
 import com.sict.android.lovecooking.Services.UserActivityServices;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -57,10 +61,12 @@ import retrofit2.Response;
 public class DishInfoActivity extends AppCompatActivity {
 
     private LinearLayout material,stepAndImg,category;
-    private ImageButton love,arrowBack,sendComment, btnEdit,btnDelete,btnMenuAdd;
-    private TextView dishname,authorName,date,liked,history;
+    private FrameLayout overlayView;
+    private ImageButton love,arrowBack,sendComment, btnEdit,btnDelete,btnMenuAdd,overlayBackButton;
+    private TextView dishname,authorName,date,liked,history,overlayTxt;
     private ImageView dishAvatar;
     private CircleImageView authorAvatar;
+    private PhotoView overlayImage;
     private EditText textCmt;
     private int clickCount=0;
     //private String url = "http://192.168.43.129:8000/";
@@ -92,7 +98,7 @@ public class DishInfoActivity extends AppCompatActivity {
     private String created;
     private String updated;
     private String historyPost;
-    private String cmt;
+
 
 
     @Override
@@ -106,7 +112,7 @@ public class DishInfoActivity extends AppCompatActivity {
         userActivityServices = RetrofitClient.getRetrofit().create(UserActivityServices.class);
         applicationInfoServices = RetrofitClient.getRetrofit().create(ApplicationInfoServices.class);
         intentGetDishInfo();
-
+        overlayView.setVisibility(View.GONE);
         comment.setHasFixedSize(true);
         comment.setLayoutManager(new LinearLayoutManager(this));
 
@@ -295,6 +301,18 @@ public class DishInfoActivity extends AppCompatActivity {
             }
         });
 
+        overlayBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                overlayView.setVisibility(View.GONE);
+            }
+        });
+        overlayTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                overlayView.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void makeNewMenu() {
@@ -386,15 +404,20 @@ public class DishInfoActivity extends AppCompatActivity {
             stepAndImg.addView(txt);
             stepAndImg.addView(textView);
 
-            PhotoView imageView = new PhotoView(this);
+            ImageView imageView = new ImageButton(this);
             if(!stepimgsList[i].equals("null")){
                 String path =url+stepimgsList[i];
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        overlayView.setVisibility(View.VISIBLE);
+                        Picasso.get().load(path).into(overlayImage);
+                    }
+                });
                 stepAndImg.addView(imageView);
                 Picasso.get().load(path).into(imageView);
             }
         }
-
-
 
         for(int i=0;i<cate.length;i++){
             TextView textView = new TextView(this);
@@ -404,6 +427,13 @@ public class DishInfoActivity extends AppCompatActivity {
             category.addView(textView);
         }
         Picasso.get().load(avatar).into(dishAvatar);
+        dishAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                overlayView.setVisibility(View.VISIBLE);
+                Picasso.get().load(avatar).into(overlayImage);
+            }
+        });
         dishname.setText(dishName);
         authorName.setText(author);
         date.setText(date_created[0]+", "+dSplit[0]+"\nVào lúc "+dSplit[1]);
@@ -495,5 +525,9 @@ public class DishInfoActivity extends AppCompatActivity {
         btnEdit = findViewById(R.id.editDish);
         btnDelete = findViewById(R.id.deleteDish);
         btnMenuAdd = findViewById(R.id.addDishMenu);
+        overlayView = findViewById(R.id.overlayView);
+        overlayImage = findViewById(R.id.overlayImage);
+        overlayBackButton = findViewById(R.id.overlayBackButton);
+        overlayTxt = findViewById(R.id.overlayTxt);
     }
 }
