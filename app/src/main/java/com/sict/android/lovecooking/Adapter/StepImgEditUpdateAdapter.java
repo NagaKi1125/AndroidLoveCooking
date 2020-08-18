@@ -3,8 +3,11 @@ package com.sict.android.lovecooking.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,9 +56,18 @@ public class StepImgEditUpdateAdapter extends RecyclerView.Adapter<StepImgViewHo
     @Override
     public void onBindViewHolder(@NonNull StepImgViewHolder holder, int position) {
         holder.btnStepView.setText(String.valueOf(position+1));
-        holder.steps.setText(stepImages.get(position).getStep());
         holder.steps.setHint("Cho nước vào, đưa ngón tay vào đến khi nước cao bằng hai đốt tay thì đủ");
-        Picasso.get().load(url+stepImages.get(position).getImg()).into(holder.imgSteps);
+        holder.steps.setText(stepImages.get(position).getStep());
+        if(stepImages.get(position).getImg().equals("null") ){
+            // do nothing -- not showing image because it not have any image data
+        }else if(stepImages.get(position).getImg().equals("") ){
+            // do nothing -- not showing image because it not have any image data
+        }else{
+            byte[] decodeImageString = Base64.decode(stepImages.get(position).getImg(),Base64.DEFAULT);
+            Bitmap decodeByteImg = BitmapFactory.decodeByteArray(decodeImageString,0,decodeImageString.length);
+            holder.imgSteps.setImageBitmap(decodeByteImg);
+        }
+        //Picasso.get().load(url+stepImages.get(position).getImg()).into(holder.imgSteps);
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

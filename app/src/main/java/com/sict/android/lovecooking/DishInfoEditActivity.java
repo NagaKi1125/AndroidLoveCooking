@@ -348,7 +348,7 @@ public class DishInfoEditActivity extends AppCompatActivity {
     }
 
     private void retrieveDishInfo() {
-        Call<Dish> getDishInfo = applicationInfoServices.getDishInfo(dish_id);
+        Call<Dish> getDishInfo = applicationInfoServices.getDishEditInfo(dish_id);
         getDishInfo.enqueue(new Callback<Dish>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
