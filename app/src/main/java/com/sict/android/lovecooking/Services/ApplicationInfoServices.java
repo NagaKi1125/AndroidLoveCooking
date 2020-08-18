@@ -20,6 +20,10 @@ public interface ApplicationInfoServices {
     @GET("dishes/{id}")
     Call<Dish> getDishInfo(@Path("id") String id);
 
+    //https://lovecooking.herokuapp.com/api/dishes-get-edit/{id}
+    @GET("dishes-get-edit/{id}")
+    Call<Dish> getDishEditInfo(@Path("id") String id);
+
     //categories
     //https://lovecooking.herokuapp.com/api/categories
     @GET("categories")
