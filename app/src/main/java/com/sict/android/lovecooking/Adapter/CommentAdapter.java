@@ -25,7 +25,10 @@ import com.sict.android.lovecooking.Services.UserActivityServices;
 import com.sict.android.lovecooking.ViewHolder.CommentViewHolder;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -75,6 +78,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
         holder.UserName.setText(cmtList.get(position).getName());
         holder.UserComment.setText(cmtList.get(position).getComment());
         holder.cmtEdit.setVisibility(View.GONE);
+        String[] dateTime = cmtList.get(position).getUpdatedAt().split("_");
+        String cmtTime = getDate(Long.parseLong(dateTime[1]),"E, dd MMM yyyy#HH:mm:ss");
+        holder.dateTime.setText(dateTime[0]+" ");
         Picasso.get().load(url+cmtList.get(position).getAvatar()).into(holder.userAvatar);
         if(cmtList.get(position).getUserId() == sharedPreferences.getInt("id",1)){
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -190,5 +196,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
         return cmtList.size();
     }
 
+    public String getDate(long milliseconds,String dateFormat){
+        SimpleDateFormat format = new SimpleDateFormat(dateFormat, Locale.forLanguageTag("vi"));
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliseconds);
+        return format.format(calendar.getTime());
+    }
 
 }

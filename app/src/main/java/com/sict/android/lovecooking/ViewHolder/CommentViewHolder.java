@@ -17,23 +17,26 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CommentViewHolder extends RecyclerView.ViewHolder {
     public CircleImageView userAvatar;
-    public TextView UserName,UserComment;
+    public TextView UserName,UserComment,dateTime;
     public EditText editCmtText;
     public ImageButton saveEdit;
     public LinearLayout cmtEdit;
     public RelativeLayout cmtShow;
 
+
     public CommentViewHolder(@NonNull View itemView) {
         super(itemView);
-        cmtShow = (RelativeLayout)itemView.findViewById(R.id.cmt_show);
+        cmtShow = itemView.findViewById(R.id.cmt_show);
 
-        userAvatar = (CircleImageView)itemView.findViewById(R.id.userAvatar);
-        UserName = (TextView)itemView.findViewById(R.id.userName);
-        UserComment = (TextView)itemView.findViewById(R.id.userCmt);
+        userAvatar = itemView.findViewById(R.id.userAvatar);
+        UserName = itemView.findViewById(R.id.userName);
+        UserComment = itemView.findViewById(R.id.userCmt);
 
-        cmtEdit = (LinearLayout)itemView.findViewById(R.id.cmt_edit);
+        cmtEdit = itemView.findViewById(R.id.cmt_edit);
 
-        editCmtText = (EditText)itemView.findViewById(R.id.cmt_edit_text);
-        saveEdit = (ImageButton)itemView.findViewById(R.id.save_edit);
+        editCmtText = itemView.findViewById(R.id.cmt_edit_text);
+        saveEdit = itemView.findViewById(R.id.save_edit);
+
+        dateTime = itemView.findViewById(R.id.cmtTime);
     }
 }

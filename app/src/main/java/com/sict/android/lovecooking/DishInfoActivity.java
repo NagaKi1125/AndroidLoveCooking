@@ -63,7 +63,7 @@ public class DishInfoActivity extends AppCompatActivity {
     private LinearLayout material,stepAndImg,category;
     private FrameLayout overlayView;
     private ImageButton love,arrowBack,sendComment, btnEdit,btnDelete,btnMenuAdd,overlayBackButton;
-    private TextView dishname,authorName,date,liked,history,overlayTxt;
+    private TextView dishname,authorName,date,liked,history,overlayTxt,mate;
     private ImageView dishAvatar;
     private CircleImageView authorAvatar;
     private PhotoView overlayImage;
@@ -370,6 +370,7 @@ public class DishInfoActivity extends AppCompatActivity {
     private void init() {
         //split material list into array String[]
         String[] mateList = materialList.split("\n");
+
         //split steps and img list into array String[]
         String[] stepsList = steps.split("_");
         String[] stepimgsList = stepImgs.split("_");
@@ -386,9 +387,10 @@ public class DishInfoActivity extends AppCompatActivity {
         //cmt
 
         //material
+        mate.setText("Nguyên Liệu ("+mateList.length+" loại nguyên liệu):");
         for (int i=0;i<mateList.length;i++) {
             TextView textView = new TextView(this);
-            String mate = (i+1)+". "+mateList[i];
+            String mate = "- "+mateList[i];
             textView.setText(mate);
             material.addView(textView);
         }
@@ -513,6 +515,7 @@ public class DishInfoActivity extends AppCompatActivity {
         love = findViewById(R.id.love);
         dishname = findViewById(R.id.dish_name);
         date = findViewById(R.id.date);
+        mate = findViewById(R.id.mate);
         liked = findViewById(R.id.liked);
         dishAvatar = findViewById(R.id.dish_image);
         authorAvatar = findViewById(R.id.author_avatar);

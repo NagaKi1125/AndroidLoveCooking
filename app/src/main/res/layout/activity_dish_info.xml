@@ -64,8 +64,8 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/logonotext"
                 android:layout_below="@id/image"
-                android:layout_width="50dp"
-                android:layout_height="50dp"/>
+                android:layout_width="70dp"
+                android:layout_height="70dp"/>
             <TextView
                 android:id="@+id/dish_name"
                 android:layout_toEndOf="@+id/author_avatar"
@@ -87,23 +87,24 @@
                 android:text="@string/lovecooking_admin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/history"
-                android:layout_below="@+id/author"
-                android:textStyle="bold|italic"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/m_n_n_n_y_c_ph_t_tri_n_nh_th_n_o"/>
+
             <TextView
                 android:id="@+id/date"
                 android:textStyle="italic"
                 android:textSize="12sp"
                 android:text="@string/ng_y_t_o"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/image"
+                android:layout_below="@+id/author"
+                android:layout_toEndOf="@+id/author_avatar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/history"
+                android:layout_below="@+id/date"
+                android:textStyle="bold|italic"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/m_n_n_n_y_c_ph_t_tri_n_nh_th_n_o"/>
             <TextView
                 android:id="@+id/cate"
                 android:layout_below="@id/history"
