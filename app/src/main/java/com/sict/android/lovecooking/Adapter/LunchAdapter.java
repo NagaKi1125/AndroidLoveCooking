@@ -1,5 +1,6 @@
 package com.sict.android.lovecooking.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,9 +31,9 @@ public class LunchAdapter extends RecyclerView.Adapter<ListDishViewHolder> {
     private List<String> lunchList;
     private Context context;
     //private String url = "http://192.168.43.129:8000/";
-    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.0.101:8000/";
     //private String url = "http://lovecooking.herokuapp.com";
-    private String menu_id;  
+    private String menu_id,url;
     private Boolean deleteOrNot;
 
     ApplicationInfoServices applicationInfoServices;
@@ -42,13 +43,15 @@ public class LunchAdapter extends RecyclerView.Adapter<ListDishViewHolder> {
     public LunchAdapter() {
     }
 
-    public void setData(List<String> lunchList, Context context, String menu_id,Boolean deleteOrNot) {
+    @SuppressLint("CommitPrefEdits")
+    public void setData(List<String> lunchList, Context context, String menu_id, Boolean deleteOrNot) {
         this.lunchList = lunchList;
         this.context = context;
         this.menu_id = menu_id;
         this.applicationInfoServices = RetrofitClient.getRetrofit().create(ApplicationInfoServices.class);
         this.sharedPreferences = context.getSharedPreferences("UserInfo",Context.MODE_PRIVATE);
         this.editor = sharedPreferences.edit();
+        this.url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
         this.deleteOrNot = deleteOrNot;
         notifyDataSetChanged();
     }

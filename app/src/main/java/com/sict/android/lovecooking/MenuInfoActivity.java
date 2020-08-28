@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -43,8 +44,10 @@ public class MenuInfoActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor  editor;
+    private String url;
     UserActivityServices userActivityServices;
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,7 @@ public class MenuInfoActivity extends AppCompatActivity {
         userActivityServices = RetrofitClient.getRetrofit().create(UserActivityServices.class);
         sharedPreferences = this.getSharedPreferences("UserInfo",MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
         deleteOrNot = false;
 
         token = sharedPreferences.getString("token","null");

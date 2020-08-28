@@ -40,9 +40,9 @@ public class DishSearchAdapter extends RecyclerView.Adapter<DishSearchViewHolder
     private List<SearchFilter> searchFilterFull;
     private Context context;
     //private String url = "http://192.168.43.129:8000/";
-    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.0.101:8000/";
     //private String url = "http://lovecooking.herokuapp.com";
-
+    private String url;
     ApplicationInfoServices applicationInfoServices;
     UserActivityServices userActivityServices;
 
@@ -59,6 +59,7 @@ public class DishSearchAdapter extends RecyclerView.Adapter<DishSearchViewHolder
         this.searchFilterFull = new ArrayList<>(searchFilter);
         this.sharedPreferences = context.getSharedPreferences("UserInfo",MODE_PRIVATE);
         this.editor = sharedPreferences.edit();
+        this.url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
         this.applicationInfoServices =
                 RetrofitClient.getRetrofit().create(ApplicationInfoServices.class);
         this.userActivityServices = RetrofitClient.getRetrofit().create(UserActivityServices.class);

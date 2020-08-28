@@ -1,5 +1,6 @@
 package com.sict.android.lovecooking.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
@@ -29,8 +30,9 @@ public class FollowListAdapter extends RecyclerView.Adapter<FollowListViewHolder
     Context context;
     List<String> followLists;
     //private String url = "http://192.168.43.129:8000/";
-    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.0.101:8000/";
     //private String url = "http://lovecooking.herokuapp.com";
+    private String url;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     UserInformationServices userInformationServices;
@@ -39,11 +41,13 @@ public class FollowListAdapter extends RecyclerView.Adapter<FollowListViewHolder
     public FollowListAdapter() {
     }
 
+    @SuppressLint("CommitPrefEdits")
     public void setData(Context context, List<String> followLists) {
         this.context = context;
         this.followLists = followLists;
         this.sharedPreferences = context.getSharedPreferences("UserInfo",Context.MODE_PRIVATE);
         this.editor = sharedPreferences.edit();
+        this.url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
         this.userInformationServices = RetrofitClient.getRetrofit().create(UserInformationServices.class);
         this.userActivityServices = RetrofitClient.getRetrofit().create(UserActivityServices.class);
         notifyDataSetChanged();

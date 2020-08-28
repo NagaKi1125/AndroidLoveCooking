@@ -48,8 +48,9 @@ public class MenuAddActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     //private String url = "http://192.168.43.129:8000/";
-    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.0.101:8000/";
     //private String url = "http://lovecooking.herokuapp.com";
+    private String url;
 
     private String dish_id,dish_avatar,dish_name;
     //new date for menu
@@ -59,6 +60,7 @@ public class MenuAddActivity extends AppCompatActivity {
     ArrayList<Menu> menuLists = new ArrayList<>();
     ArrayList<String> menuDate = new ArrayList<>();
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +72,7 @@ public class MenuAddActivity extends AppCompatActivity {
         userInformationServices = RetrofitClient.getRetrofit().create(UserInformationServices.class);
         sharedPreferences = MenuAddActivity.this.getSharedPreferences("UserInfo",MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
 
         // retrieve dish data
         Picasso.get().load(dish_avatar).into(dishAvatar);

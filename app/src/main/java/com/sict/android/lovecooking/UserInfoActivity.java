@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -47,13 +48,15 @@ public class UserInfoActivity extends AppCompatActivity {
     private TextView name,username,gender,birth,address,level,join;
     private CircleImageView avatar;
     //private String url = "http://192.168.43.129:8000/";
-    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.0.101:8000/";
+    private String url;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     UserInformationServices userInformationServices;
     UserActivityServices userActivityServices;
     private String token,UserFullname = "Love Cooking";
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,7 @@ public class UserInfoActivity extends AppCompatActivity {
         getElementId();
         sharedPreferences = this.getSharedPreferences("UserInfo",MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
         userInformationServices = RetrofitClient.getRetrofit().create(UserInformationServices.class);
         userActivityServices = RetrofitClient.getRetrofit().create(UserActivityServices.class);
 

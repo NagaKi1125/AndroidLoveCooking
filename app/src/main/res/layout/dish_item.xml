@@ -2,6 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
     android:layout_marginVertical="10dp"
     android:layout_height="350dp">
     <RelativeLayout
@@ -40,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/love"
+            android:backgroundTint="@color/white"
             android:src="@drawable/ic_favorite_border_black_24dp"
             android:layout_below="@+id/author"
             android:layout_marginTop="12dp"
@@ -50,7 +53,7 @@
             android:id="@+id/liked"
             android:layout_below="@+id/author"
             android:layout_toEndOf="@+id/love"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="27dp"
             android:text="@string/like"
             android:layout_marginStart="10dp"
             android:layout_width="wrap_content"

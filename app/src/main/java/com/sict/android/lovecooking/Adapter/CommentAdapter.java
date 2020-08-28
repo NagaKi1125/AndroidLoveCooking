@@ -1,5 +1,6 @@
 package com.sict.android.lovecooking.Adapter;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,9 +41,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     private List<Comment> cmtList;
     private Context context;
-    private String id;
+    private String id,url;
     //private String url = "http://192.168.43.129:8000/";
-    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.0.101:8000/";
     //private String url = "http://lovecooking.herokuapp.com";
     ApplicationInfoServices applicationInfoServices;
     UserActivityServices userActivityServices;
@@ -53,7 +54,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     public CommentAdapter() {
     }
 
-    public void setData(List<Comment> cmtList, Context context,String id) {
+    @SuppressLint("CommitPrefEdits")
+    public void setData(List<Comment> cmtList, Context context, String id) {
         this.cmtList = cmtList;
         this.context = context;
         this.id = id;
@@ -61,6 +63,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
         this.editor = sharedPreferences.edit();
         this.applicationInfoServices =
                 RetrofitClient.getRetrofit().create(ApplicationInfoServices.class);
+        this.url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
         this.userActivityServices = RetrofitClient.getRetrofit().create(UserActivityServices.class);
         notifyDataSetChanged();
     }

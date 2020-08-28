@@ -35,6 +35,7 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.github.marlonlom.utilities.timeago.TimeAgoMessages;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
 import com.sict.android.lovecooking.Adapter.CommentAdapter;
 import com.sict.android.lovecooking.Model.Comment;
 import com.sict.android.lovecooking.Model.Dish;
@@ -61,6 +62,7 @@ import retrofit2.Response;
 public class DishInfoActivity extends AppCompatActivity {
 
     private LinearLayout material,stepAndImg,category;
+    private MaterialButton follow;
     private FrameLayout overlayView;
     private ImageButton love,arrowBack,sendComment, btnEdit,btnDelete,btnMenuAdd,overlayBackButton;
     private TextView dishname,authorName,date,liked,history,overlayTxt,mate;
@@ -68,10 +70,11 @@ public class DishInfoActivity extends AppCompatActivity {
     private CircleImageView authorAvatar;
     private PhotoView overlayImage;
     private EditText textCmt;
-    private int clickCount=0;
+    private int btnLoveClick=0,btnFollowClick=0;
     //private String url = "http://192.168.43.129:8000/";
-    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.0.101:8000/";
     //private String url = "http://lovecooking.herokuapp.com";
+    private String url;
 
     RecyclerView comment;
     CommentAdapter commentAdapter;
@@ -109,6 +112,7 @@ public class DishInfoActivity extends AppCompatActivity {
 
         sharedPreferences = this.getSharedPreferences("UserInfo",MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
         userActivityServices = RetrofitClient.getRetrofit().create(UserActivityServices.class);
         applicationInfoServices = RetrofitClient.getRetrofit().create(ApplicationInfoServices.class);
         intentGetDishInfo();
@@ -126,8 +130,8 @@ public class DishInfoActivity extends AppCompatActivity {
         love.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                clickCount++;
-                if(clickCount==2) {
+                btnLoveClick++;
+                if(btnLoveClick==2) {
                     Call<UserLikedList> unlove = userActivityServices.notLoveThis(
                             "Bearer "+sharedPreferences.getString("token","null"),Integer.parseInt(id));
                     unlove.enqueue(new Callback<UserLikedList>() {
@@ -135,7 +139,7 @@ public class DishInfoActivity extends AppCompatActivity {
                         public void onResponse(Call<UserLikedList> call, Response<UserLikedList> response) {
                             if(response.isSuccessful()){
                                 love.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                                clickCount=0;
+                                btnLoveClick=0;
                                 like-=1;
                                 liked.setText(like + " lượt thích");
                                 //dishLiked = removeDishUnlikedId(dishLiked,id);
@@ -440,16 +444,25 @@ public class DishInfoActivity extends AppCompatActivity {
         authorName.setText(author);
         date.setText(date_created[0]+", "+dSplit[0]+"\nVào lúc "+dSplit[1]);
         liked.setText(like + " lượt thích");
-
+    
+        //like button
         if(!sharedPreferences.getString("dish_liked","_").contains(id)){
-            clickCount=0;
+            btnLoveClick=0;
             love.setImageResource(R.drawable.ic_favorite_border_black_24dp);
         }else{
-            clickCount=1;
+            btnLoveClick=1;
             love.setImageResource(R.drawable.ic_favorite_black_24dp);
         }
 
-
+        //follow button
+        String userId = String.valueOf(sharedPreferences.getInt("id", 0));
+        if(sharedPreferences.getString("follow","_").contains(userId)){
+            btnFollowClick=0;
+            follow.setText("Theo dõi");
+        }else{
+            btnFollowClick=1;
+            follow.setText("Hủy theo dõi");
+        }
     }
 
     private void getDishComment(String dishID) {
@@ -532,5 +545,6 @@ public class DishInfoActivity extends AppCompatActivity {
         overlayImage = findViewById(R.id.overlayImage);
         overlayBackButton = findViewById(R.id.overlayBackButton);
         overlayTxt = findViewById(R.id.overlayTxt);
+        follow = (MaterialButton)findViewById(R.id.follow);
     }
 }

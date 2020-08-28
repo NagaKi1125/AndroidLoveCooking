@@ -58,6 +58,18 @@
                     android:background="@android:color/transparent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/todo" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/follow"
+                    app:cornerRadius="20dp"
+                    android:theme="@style/Theme.MaterialComponents"
+                    android:text="follow"
+                    android:layout_gravity="bottom|end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    app:strokeColor="@color/antique_white"
+                    app:rippleColor="@color/gray"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
             </FrameLayout>
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/author_avatar"

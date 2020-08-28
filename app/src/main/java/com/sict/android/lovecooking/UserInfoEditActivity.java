@@ -3,6 +3,7 @@ package com.sict.android.lovecooking;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -55,10 +56,12 @@ public class UserInfoEditActivity extends AppCompatActivity {
 
     private int genderRetrieve = 0;
     //private String url = "http://192.168.43.129:8000/";
-    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.0.101:8000/";
+    private String url;
 
     private String avatarImage = "null",birthdayDate="00-00-0000";
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +73,7 @@ public class UserInfoEditActivity extends AppCompatActivity {
         userActivityServices = RetrofitClient.getRetrofit().create(UserActivityServices.class);
         sharedPreferences = this.getSharedPreferences("UserInfo",MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
 
         datePicker.setVisibility(View.GONE);
         btnLayout.setVisibility(View.GONE);

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -54,10 +55,10 @@ public class DishAddActivity extends AppCompatActivity{
     private ImageButton back;
     private ImageView dishAva;
     private LinearLayout lnNewCate;
-    private String cateName, cate_id,steps="";
+    private String cateName, cate_id,steps="",url;
     private boolean [] cateChecked;
     //private String url = "http://192.168.43.129:8000/";
-    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.0.101:8000/";
     //private String url = "http://lovecooking.herokuapp.com";
 
     private static final int PICK_IMAGE =0;
@@ -72,6 +73,7 @@ public class DishAddActivity extends AppCompatActivity{
     ApplicationInfoServices applicationInfoServices;
     UserActivityServices userActivityServices;
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +81,9 @@ public class DishAddActivity extends AppCompatActivity{
 
         sharedPreferences = getSharedPreferences("UserInfo",MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        //url link
+        url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
+
         applicationInfoServices = RetrofitClient.getRetrofit().create(ApplicationInfoServices.class);
         userActivityServices = RetrofitClient.getRetrofit().create(UserActivityServices.class);
 

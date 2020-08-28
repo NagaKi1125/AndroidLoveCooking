@@ -1,5 +1,6 @@
 package com.sict.android.lovecooking.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,15 +25,18 @@ public class StepImgAdapter extends RecyclerView.Adapter<StepImgViewHolder> {
     private Context context;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    private String url;
     private Uri stepUri;
     public StepImgAdapter() {
     }
 
+    @SuppressLint("CommitPrefEdits")
     public void setData(List<StepImage> stepImages, Context context) {
         this.stepImages = stepImages;
         this.context = context;
         this.sharedPreferences = context.getSharedPreferences("UserInfo",Context.MODE_PRIVATE);
         this.editor =sharedPreferences.edit();
+        this.url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
         notifyDataSetChanged();
     }
 

@@ -33,8 +33,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class DishAdapter extends RecyclerView.Adapter<DishViewHolder> {
     private List<Dish> dishList;
     //private String url = "http://192.168.43.129:8000/";
-    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.0.101:8000/";
     //private String url = "http://lovecooking.herokuapp.com";
+    private String url;
     private int[] clickCount;
     private int[] likedCount;
 
@@ -52,6 +53,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishViewHolder> {
         this.dishList = dishList;
         this.sharedPreferences = context.getSharedPreferences("UserInfo",MODE_PRIVATE);
         this.editor = sharedPreferences.edit();
+        this.url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
         this.clickCount = new int[listSize];
         this.likedCount = new int[listSize];
         this.applicationInfoServices =

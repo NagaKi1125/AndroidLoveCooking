@@ -1,5 +1,6 @@
 package com.sict.android.lovecooking.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,17 +32,20 @@ public class StepImgEditUpdateAdapter extends RecyclerView.Adapter<StepImgViewHo
     private Context context;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    private String url;
     //private String url = "http://192.168.43.129:8000/";
-    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.0.101:8000/";
     //private String url = "http://lovecooking.herokuapp.com";
     public StepImgEditUpdateAdapter() {
     }
 
+    @SuppressLint("CommitPrefEdits")
     public void setData(List<StepImage> stepImages, Context context) {
         this.stepImages = stepImages;
         this.context = context;
         this.sharedPreferences = context.getSharedPreferences("UserInfo",Context.MODE_PRIVATE);
         this.editor =sharedPreferences.edit();
+        this.url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
         this.stepByStep = new ArrayList<>();
         notifyDataSetChanged();
     }

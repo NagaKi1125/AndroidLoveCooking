@@ -108,6 +108,10 @@ public interface UserActivityServices {
                                   @Field("category") String cate);
 
     //follow and unfollow
+    @POST("follow/{fid}")
+    Call<ResponseBody> follow(@Header("Authorization") String token,
+                              @Path("fid") String fid);
+
     @POST("unfollow/{fid}")
     Call<ResponseBody> unfollow(@Header("Authorization") String token,
                                 @Path("fid") String fid);

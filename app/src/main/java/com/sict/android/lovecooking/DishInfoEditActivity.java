@@ -59,9 +59,9 @@ public class DishInfoEditActivity extends AppCompatActivity {
     private LinearLayout lnNewCate;
     private String cateName="", cate_id="",steps ="";
     private boolean [] cateChecked;
-    private String dish_id;
+    private String dish_id,url;
     //private String url = "http://192.168.43.129:8000/";
-    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.0.101:8000/";
     //private String url = "http://lovecooking.herokuapp.com";
 
     private static final int PICK_IMAGE =0;
@@ -83,6 +83,8 @@ public class DishInfoEditActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("UserInfo",MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
+
         applicationInfoServices = RetrofitClient.getRetrofit().create(ApplicationInfoServices.class);
         userActivityServices = RetrofitClient.getRetrofit().create(UserActivityServices.class);
         dish_id = getIntent().getStringExtra("dish_id");

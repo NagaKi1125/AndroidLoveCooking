@@ -1,5 +1,6 @@
 package com.sict.android.lovecooking.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,8 +31,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     private List<MenuList> menuLists;
     private Context context;
     //private String url = "http://192.168.43.129:8000/";
-    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.0.101:8000/";
     //private String url = "http://lovecooking.herokuapp.com";
+    private String url;
     SharedPreferences sharedPreferences ;
     SharedPreferences.Editor editor;
     UserActivityServices userActivityServices;
@@ -39,11 +41,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     public MenuAdapter() {
     }
 
+    @SuppressLint("CommitPrefEdits")
     public void setData(List<MenuList> menuLists, Context context) {
         this.menuLists = menuLists;
         this.context = context;
         this.sharedPreferences = context.getSharedPreferences("UserInfo",Context.MODE_PRIVATE);
         this.editor = sharedPreferences.edit();
+        this.url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
         this.userActivityServices = RetrofitClient.getRetrofit().create(UserActivityServices.class);
         notifyDataSetChanged();
     }

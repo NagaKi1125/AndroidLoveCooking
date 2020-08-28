@@ -2,6 +2,7 @@ package com.sict.android.lovecooking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,10 +28,11 @@ public class LoginActivity extends AppCompatActivity {
     private EditText email,password;
     private MaterialButton btnLogin,btnRegister;
     ApplicationActivityServices applicationActivityServices ;
-
+    private String url;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor ;
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
         applicationActivityServices = RetrofitClient.getRetrofit().create(ApplicationActivityServices.class);
         sharedPreferences = getApplicationContext().getSharedPreferences("UserInfo",MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
