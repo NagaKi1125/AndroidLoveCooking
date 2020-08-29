@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,6 +40,7 @@ import com.google.android.material.button.MaterialButton;
 import com.sict.android.lovecooking.Adapter.CommentAdapter;
 import com.sict.android.lovecooking.Model.Comment;
 import com.sict.android.lovecooking.Model.Dish;
+import com.sict.android.lovecooking.Model.Follow;
 import com.sict.android.lovecooking.Model.UserLikedList;
 import com.sict.android.lovecooking.Remote.RetrofitClient;
 import com.sict.android.lovecooking.Services.ApplicationInfoServices;
@@ -96,7 +98,8 @@ public class DishInfoActivity extends AppCompatActivity {
     private String materialList;
     private String steps;
     private String stepImgs;
-    private String author;
+    private String authorId;
+    private String author,userAuthor;
     private int like;
     private String created;
     private String updated;
@@ -109,13 +112,14 @@ public class DishInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dish_info);
         getComponentID();
+        intentGetDishInfo();
 
         sharedPreferences = this.getSharedPreferences("UserInfo",MODE_PRIVATE);
         editor = sharedPreferences.edit();
         url = sharedPreferences.getString("url","http://192.168.0.101:8000/");
         userActivityServices = RetrofitClient.getRetrofit().create(UserActivityServices.class);
         applicationInfoServices = RetrofitClient.getRetrofit().create(ApplicationInfoServices.class);
-        intentGetDishInfo();
+
         overlayView.setVisibility(View.GONE);
         comment.setHasFixedSize(true);
         comment.setLayoutManager(new LinearLayoutManager(this));
@@ -123,6 +127,12 @@ public class DishInfoActivity extends AppCompatActivity {
         if(!author.equals(sharedPreferences.getString("full_name","Admin - Love Cooking"))){
             btnDelete.setVisibility(View.GONE);
             btnEdit.setVisibility(View.GONE);
+        }
+
+        if(authorId.equals("0")){
+            userAuthor = "1";
+        }else{
+            userAuthor = authorId;
         }
 
         init();
@@ -184,6 +194,72 @@ public class DishInfoActivity extends AppCompatActivity {
                 }
             }
         });
+
+        follow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnFollowClick++;
+
+                if(btnFollowClick==2){
+                    Call<Follow> unfollow = userActivityServices.unfollow(
+                            "Bearer "+sharedPreferences.getString("token","null"),userAuthor);
+                    unfollow.enqueue(new Callback<Follow>() {
+                        @Override
+                        public void onResponse(Call<Follow> call, Response<Follow> response) {
+                            if(response.isSuccessful()){
+                                if(sharedPreferences.getString("follow","_").contains(userAuthor)){
+                                    editor.putString("follow",response.body().getFollowIdList());
+                                    editor.apply();
+                                }else{
+                                    Toast.makeText(v.getContext(),
+                                            "Already unfollow this chef",Toast.LENGTH_LONG).show();
+                                }
+                                btnFollowClick=0;
+                                follow.setText("Theo dõi");
+                            }else{
+                                Toast.makeText(v.getContext(),
+                                        "Something went wrong",Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Follow> call, Throwable t) {
+                            Toast.makeText(v.getContext(),
+                                    "Serve could not response",Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }else{
+                    Call<Follow> followChef = userActivityServices.follow(
+                            "Bearer "+sharedPreferences.getString("token","null"),userAuthor);
+                    followChef.enqueue(new Callback<Follow>() {
+                        @Override
+                        public void onResponse(Call<Follow> call, Response<Follow> response) {
+                            if(response.isSuccessful()){
+                                if( sharedPreferences.getString("follow","_").contains(userAuthor)){
+                                    Toast.makeText(v.getContext(),
+                                            "Already follow this chef",Toast.LENGTH_LONG).show();
+                                }else{
+                                    editor.putString("follow",response.body().getFollowIdList());
+                                    editor.apply();
+                                }
+                                btnFollowClick++;
+                                follow.setText("Hủy theo dõi");
+                            }else{
+                                Toast.makeText(v.getContext(),
+                                        "Something went wrong",Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Follow> call, Throwable t) {
+                            Toast.makeText(v.getContext(),
+                                    "Serve could not response",Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            }
+        });
+
 
         arrowBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -371,6 +447,7 @@ public class DishInfoActivity extends AppCompatActivity {
         finish();startActivity(intent);
     }
 
+    @SuppressLint("SetTextI18n")
     private void init() {
         //split material list into array String[]
         String[] mateList = materialList.split("\n");
@@ -392,9 +469,9 @@ public class DishInfoActivity extends AppCompatActivity {
 
         //material
         mate.setText("Nguyên Liệu ("+mateList.length+" loại nguyên liệu):");
-        for (int i=0;i<mateList.length;i++) {
+        for (String s : mateList) {
             TextView textView = new TextView(this);
-            String mate = "- "+mateList[i];
+            String mate = "- " + s;
             textView.setText(mate);
             material.addView(textView);
         }
@@ -455,8 +532,7 @@ public class DishInfoActivity extends AppCompatActivity {
         }
 
         //follow button
-        String userId = String.valueOf(sharedPreferences.getInt("id", 0));
-        if(sharedPreferences.getString("follow","_").contains(userId)){
+        if(!sharedPreferences.getString("follow","_").contains(userAuthor)){
             btnFollowClick=0;
             follow.setText("Theo dõi");
         }else{
@@ -514,6 +590,7 @@ public class DishInfoActivity extends AppCompatActivity {
         materialList =intent.getStringExtra("material");
         steps = intent.getStringExtra("steps");
         stepImgs = intent.getStringExtra("step_imgs");
+        authorId = intent.getStringExtra("author_id");
         author =intent.getStringExtra("author");
         like = intent.getIntExtra("like_count",0);
         created= intent.getStringExtra("created_at");

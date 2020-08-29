@@ -33,6 +33,9 @@ public class Dish {
     @SerializedName("step_imgs")
     @Expose
     private String stepImgs;
+    @SerializedName("author_id")
+    @Expose
+    private String authorId;
     @SerializedName("author")
     @Expose
     private String author;
@@ -56,7 +59,7 @@ public class Dish {
     }
 
     public Dish(int id, String dishName, String cateId, String avatar, String description,
-                String use, String material, String steps, String stepImgs, String author,
+                String use, String material, String steps, String stepImgs, String authorId, String author,
                 int likedCount, Integer checked, List<History> history,
                 String createdAt, String updatedAt) {
         this.id = id;
@@ -68,6 +71,7 @@ public class Dish {
         this.material = material;
         this.steps = steps;
         this.stepImgs = stepImgs;
+        this.authorId = authorId;
         this.author = author;
         this.likedCount = likedCount;
         this.checked = checked;
@@ -146,6 +150,14 @@ public class Dish {
 
     public void setStepImgs(String stepImgs) {
         this.stepImgs = stepImgs;
+    }
+
+    public String getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 
     public String getAuthor() {

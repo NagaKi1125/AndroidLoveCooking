@@ -122,6 +122,7 @@ public class BreakfastAdapter extends RecyclerView.Adapter<ListDishViewHolder> {
                     String material =response.body().getMaterial();
                     String steps = response.body().getSteps();
                     String step_imgs = response.body().getStepImgs();
+                    String authorId = response.body().getAuthorId();
                     String author = response.body().getAuthor();
                     int liked_count = response.body().getLikedCount();
                     List<Dish.History> dhpost = response.body().getHistory();
@@ -134,7 +135,7 @@ public class BreakfastAdapter extends RecyclerView.Adapter<ListDishViewHolder> {
                     String historyPost = post;
                     // send info
                     sendDishInfo(id,dish_name,cate_id,avatar,description,use,material,steps,step_imgs,
-                            author,liked_count,historyPost,created_at,updated_at,v);
+                            authorId,author,liked_count,historyPost,created_at,updated_at,v);
 
                 }else {
                     Toast.makeText(v.getContext(),
@@ -154,7 +155,7 @@ public class BreakfastAdapter extends RecyclerView.Adapter<ListDishViewHolder> {
     }
 
     private void sendDishInfo(int id, String dish_name, String cate_id, String avatar, String description,
-                              String use, String material, String steps, String step_imgs,
+                              String use, String material, String steps, String step_imgs,String authorId,
                               String author, int liked_count, String historyPost,
                               String created_at, String updated_at, View v) {
 
@@ -170,6 +171,7 @@ public class BreakfastAdapter extends RecyclerView.Adapter<ListDishViewHolder> {
         intent.putExtra("step_imgs",step_imgs);
         intent.putExtra("created_at",created_at);
         intent.putExtra("updated_at",updated_at);
+        intent.putExtra("author_id",authorId);
         intent.putExtra("author",author);
         intent.putExtra("like_count",liked_count);
         intent.putExtra("hispost", historyPost);

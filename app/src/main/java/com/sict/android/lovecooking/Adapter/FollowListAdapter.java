@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sict.android.lovecooking.Model.Follow;
 import com.sict.android.lovecooking.R;
 import com.sict.android.lovecooking.Remote.RetrofitClient;
 import com.sict.android.lovecooking.Services.UserActivityServices;
@@ -20,7 +21,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,17 +71,20 @@ public class FollowListAdapter extends RecyclerView.Adapter<FollowListViewHolder
         holder.btnFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<ResponseBody> unfollow = userActivityServices.unfollow(
+                Call<Follow> unfollow = userActivityServices.unfollow(
                         "Bearer "+sharedPreferences.getString("token","null"),
                         followList[0]
                 );
-                unfollow.enqueue(new Callback<ResponseBody>() {
+                unfollow.enqueue(new Callback<Follow>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(Call<Follow> call, Response<Follow> response) {
                         if(response.isSuccessful()){
                             followLists.remove(position);
                             notifyItemRemoved(position);
                             notifyItemRangeChanged(position,followLists.size());
+
+                            editor.putString("follow",response.body().getFollowIdList());
+                            editor.apply();
                         }else{
                             Toast.makeText(context,
                                     "Unfollow Failed \n"+response.message(),
@@ -90,7 +93,7 @@ public class FollowListAdapter extends RecyclerView.Adapter<FollowListViewHolder
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(Call<Follow> call, Throwable t) {
                         Toast.makeText(context,
                                 "Serve could not response \n"+t.toString(),
                                 Toast.LENGTH_SHORT).show();

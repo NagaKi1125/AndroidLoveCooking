@@ -81,6 +81,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishViewHolder> {
         String material =dishList.get(position).getMaterial();
         String steps = dishList.get(position).getSteps();
         String step_imgs = dishList.get(position).getStepImgs();
+        String authorId = dishList.get(position).getAuthorId();
         String author = dishList.get(position).getAuthor();
         likedCount[position] = dishList.get(position).getLikedCount();
         List<Dish.History> dhpost = dishList.get(position).getHistory();
@@ -186,6 +187,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishViewHolder> {
                 intent.putExtra("step_imgs",step_imgs);
                 intent.putExtra("created_at",created_at);
                 intent.putExtra("updated_at",updated_at);
+                intent.putExtra("author_id",authorId);
                 intent.putExtra("author",author);
                 intent.putExtra("like_count",likedCount[position]);
                 intent.putExtra("hispost", historyPost);

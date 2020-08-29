@@ -5,6 +5,7 @@ import com.sict.android.lovecooking.Model.Comment;
 import com.sict.android.lovecooking.Model.CommentEdit;
 import com.sict.android.lovecooking.Model.Dish;
 import com.sict.android.lovecooking.Model.DishAdd;
+import com.sict.android.lovecooking.Model.Follow;
 import com.sict.android.lovecooking.Model.UserLikedList;
 
 import okhttp3.ResponseBody;
@@ -109,11 +110,11 @@ public interface UserActivityServices {
 
     //follow and unfollow
     @POST("follow/{fid}")
-    Call<ResponseBody> follow(@Header("Authorization") String token,
-                              @Path("fid") String fid);
+    Call<Follow> follow(@Header("Authorization") String token,
+                        @Path("fid") String fid);
 
     @POST("unfollow/{fid}")
-    Call<ResponseBody> unfollow(@Header("Authorization") String token,
+    Call<Follow> unfollow(@Header("Authorization") String token,
                                 @Path("fid") String fid);
 
     //user information update (without password)
