@@ -7,8 +7,8 @@ public class RetrofitClient {
     private static Retrofit retrofit = null;
 
     //private static final String BASE_URL = "http://192.168.43.129:8000/api/";
-    //private static final String BASE_URL = "http://192.168.0.101:8000/api/";
-    private static final String BASE_URL = "http://192.168.1.9:8000/api/";
+    private static final String BASE_URL = "http://192.168.0.101:8000/api/";
+    //private static final String BASE_URL = "http://192.168.1.9:8000/api/";
     //private static final String BASE_URL = "http://lovecooking.herokuapp.com/api/";
 
     public static Retrofit getRetrofit(){

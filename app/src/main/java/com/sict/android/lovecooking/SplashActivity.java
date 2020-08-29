@@ -27,8 +27,8 @@ public class SplashActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     ApplicationActivityServices applicationActivityServices;
     //private String url = "http://192.168.43.129:8000/";
-    //private String url = "http://192.168.0.101:8000/";
-    private String url = "http://192.168.1.9:8000/";
+    private String url = "http://192.168.0.101:8000/";
+    //private String url = "http://192.168.1.9:8000/";
     //private String url = "http://lovecooking.herokuapp.com";
     private ProgressBar progressBar;
     Handler handler;
